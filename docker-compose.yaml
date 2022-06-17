@@ -1,0 +1,16 @@
+version: '3'
+services:
+  my-app:
+    build:
+      context: app/ #app dir 
+    ports:
+      - "5000"
+
+  nginx-load:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - my-app
+    ports:
+      - "80:80"
